@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Mc2.CrudTest.Framework.Core.Contracts\Mc2.CrudTest.Framework.Core.Contracts.csproj" />
     <ProjectReference Include="..\Mc2.CrudTest.Framework.Core.Domain\Mc2.CrudTest.Framework.Core.Domain.csproj" />
+    <ProjectReference Include="..\Mc2.CrudTest.Framework.Infra.Data.Sql\Mc2.CrudTest.Framework.Infra.Data.Sql.csproj" />
   </ItemGroup>
 
 </Project>

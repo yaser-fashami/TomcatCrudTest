@@ -18,6 +18,8 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
         _serviceProvider = serviceProvider;
         _logger = logger;
     }
+
+    public override int Order => 2;
     #endregion
 
     #region Send Commands

@@ -22,6 +22,8 @@ public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
         _serviceProvider = serviceProvider;
         _logger = logger;
     }
+
+    public override int Order => 1;
     #endregion
 
     #region Send Commands

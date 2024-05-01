@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Customer\Customer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Mc2.CrudTest.Core.Contracts\Mc2.CrudTest.Core.Contracts.csproj" />
     <ProjectReference Include="..\Mc2.CrudTest.Framework.Infra.Data.Sql.Queries\Mc2.CrudTest.Framework.Infra.Data.Sql.Queries.csproj" />
   </ItemGroup>

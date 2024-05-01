@@ -30,11 +30,11 @@ public static class AuditableShadowProperties
                                             .Where(e=>typeof(IAuditable).IsAssignableFrom(e.ClrType)))
         {
             modelBuilder.Entity(entityType.ClrType)
-                        .Property<int?>(CreatedByUserId);
+                        .Property<Guid>(CreatedByUserId);
             modelBuilder.Entity(entityType.ClrType)
-                        .Property<string>(ModifiedByUserId).HasMaxLength(50);
+                        .Property<Guid?>(ModifiedByUserId);
             modelBuilder.Entity(entityType.ClrType)
-                        .Property<DateTime?>(CreatedDateTime);
+                        .Property<DateTime>(CreatedDateTime);
             modelBuilder.Entity(entityType.ClrType)
                         .Property<DateTime?>(ModifiedDateTime);
         }
@@ -45,10 +45,10 @@ public static class AuditableShadowProperties
         IUserInfoService userInfoService)
     {
 
-        var userAgent = userInfoService.GetUserAgent();
-        var userIp = userInfoService.GetUserIp();
+        var userAgent = "Test";//userInfoService.GetUserAgent();
+        var userIp = "127.0.0.1";//userInfoService.GetUserIp();
         var now = DateTime.UtcNow;
-        var userId = userInfoService.UserId();
+        var userId = new Guid(); //userInfoService.UserId();
 
         var modifiedEntries = changeTracker.Entries<IAuditable>().Where(x => x.State == EntityState.Modified);
         foreach (var modifiedEntry in modifiedEntries)

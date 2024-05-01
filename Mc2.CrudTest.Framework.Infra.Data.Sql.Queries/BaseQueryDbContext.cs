@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Mc2.CrudTest.Framework.Core.Domain.Toolkits.ValueObjects;
+using Mc2.CrudTest.Framework.Infra.Data.Sql.Conversions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Framework.Infra.Data.Sql.Queries;
 public abstract class BaseQueryDbContext : DbContext
@@ -9,13 +11,21 @@ public abstract class BaseQueryDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
         optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+        base.OnConfiguring(optionsBuilder);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Properties<FirstName>().HaveConversion<FirstNameConversion>();
+        configurationBuilder.Properties<LastName>().HaveConversion<LastNameConversion>();
+        configurationBuilder.Properties<PhoneNumber>().HaveConversion<PhoneNumberConversion>();
+        configurationBuilder.Properties<Email>().HaveConversion<EmailConversion>();
     }
 
     public sealed override int SaveChanges()

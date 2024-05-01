@@ -1,4 +1,6 @@
-﻿using Mc2.CrudTest.Framework.Infra.Data.Sql.Commands.Extensions;
+﻿using Mc2.CrudTest.Framework.Core.Domain.Toolkits.ValueObjects;
+using Mc2.CrudTest.Framework.Infra.Data.Sql.Commands.Extensions;
+using Mc2.CrudTest.Framework.Infra.Data.Sql.Conversions;
 using Mc2.CrudTest.Framework.Utilities.Services.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -46,6 +48,14 @@ public abstract class BaseCommandDbContext : DbContext
         modelBuilder.AddAuditableShadowProperties();
     }
 
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Properties<FirstName>().HaveConversion<FirstNameConversion>();
+        configurationBuilder.Properties<LastName>().HaveConversion<LastNameConversion>();
+        configurationBuilder.Properties<PhoneNumber>().HaveConversion<PhoneNumberConversion>();
+        configurationBuilder.Properties<Email>().HaveConversion<EmailConversion>();
+    }
+
     public override int SaveChanges()
     {
         ChangeTracker.DetectChanges();
@@ -70,7 +80,7 @@ public abstract class BaseCommandDbContext : DbContext
 
     private void SetShadowProperties()
     {
-        var userInfoService = this.GetService<IUserInfoService>();
-        ChangeTracker.SetAuditableEntityPropertyValues(userInfoService);
+        //var userInfoService = this.GetService<IUserInfoService>();
+        ChangeTracker.SetAuditableEntityPropertyValues(null);
     }
 }

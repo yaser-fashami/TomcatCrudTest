@@ -14,7 +14,7 @@ public class CreateCustomerCommandHandler : CommandHandler<CreateCustomerCommand
 
     public override async Task<CommandResult> Handle(CreateCustomerCommand request)
     {
-        Domain.Customer.Entities.Customer customer = new(request.FirstName, request.LastName, request.DateOfBirth, request.PhoneNumber, request.Email, request.BankAcountNumber);
+        Domain.Entities.Customer customer = new(request.FirstName, request.LastName, request.DateOfBirth, request.PhoneNumber, request.Email, request.BankAcountNumber);
         await _customerCommandRepository.InsertAsync(customer);
         await _customerCommandRepository.CommitAsync();
         return Ok();

@@ -1,3 +1,4 @@
+using Mc2.CrudTest.Framework.EndPoints.WebMVC.Extensions.DependencyInjection;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

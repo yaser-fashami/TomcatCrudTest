@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <Compile Remove="Common\BankAcountNumberConversion.cs" />
+    <Compile Remove="Common\EmailConversion.cs" />
+    <Compile Remove="Common\FirstNameConversion.cs" />
+    <Compile Remove="Common\LastNameConversion.cs" />
+    <Compile Remove="Common\PhoneNumberConversion.cs" />
   </ItemGroup>
 
   <ItemGroup>

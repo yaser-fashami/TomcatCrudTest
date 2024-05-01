@@ -1,0 +1,41 @@
+﻿@model CreateCustomerCommand
+
+<div class="container">
+    <div class="row mb-4">
+        <h3>Create a Customer</h3>
+    </div>
+    <form class="form-control" asp-controller="Customer" asp-action="Post" method="post">
+        <div class="row">
+            <div class="col-5">
+                <label class="form-label" asp-for="FirstName">FirstName : </label><input type="text" name="FirstName" class="form-control"/>
+            </div>
+            <div class="col-5">
+                <label class="form-label" asp-for="LastName">LastName : </label><input type="text" name="LastName" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <label class="form-label" asp-for="DateOfBirth">Date Of Birth : </label><input type="date" name="DateOfBirth" class="form-control" />
+            </div>
+            <div class="col-5">
+                <label class="form-label" asp-for="PhoneNumber">PhoneNumber : </label><input type="text" name="PhoneNumber" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <label class="form-label" asp-for="Email">Email : </label><input type="email" name="Email" class="form-control" />
+            </div>
+            <div class="col-5">
+                <label class="form-label" asp-for="BankAcountNumber">BankAcountNumber : </label><input type="text" name="BankAcountNumber" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <button type="submit" class="btn btn-success m-4">Save</button>
+            </div>
+            <div class="col-1">
+                <button type="reset" class="btn btn-primary mt-4">Reset</button>
+            </div>
+        </div>
+    </form>
+</div>

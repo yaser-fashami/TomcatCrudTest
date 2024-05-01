@@ -2,12 +2,19 @@
 using Mc2.CrudTest.Framework.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 
 namespace Mc2.CrudTest.Framework.Infra.Data.Sql.Commands;
 
-public class BaseCommandRepository<TEntity, TDbContext> : ICommandRepository<TEntity>, IUnitOfWork
+public class BaseCommandRepository<TEntity, TDbContext, TId> : ICommandRepository<TEntity, TId>, IUnitOfWork
     where TEntity : AggregateRoot
     where TDbContext : BaseCommandDbContext
+    where TId : struct,
+          IComparable,
+          IComparable<TId>,
+          IConvertible,
+          IEquatable<TId>,
+          IFormattable
 {
     protected readonly TDbContext _dbContext;
     public BaseCommandRepository(TDbContext dbContext)
@@ -35,43 +42,43 @@ public class BaseCommandRepository<TEntity, TDbContext> : ICommandRepository<TEn
         _dbContext.Commit();
     }
 
-    void ICommandRepository<TEntity>.Delete(ulong id)
+    public void Delete(TId id)
     {
         var entity = _dbContext.Set<TEntity>().Find(id);
         _dbContext.Set<TEntity>().Remove(entity);
     }
 
-    void ICommandRepository<TEntity>.Delete(TEntity entity)
+    public void Delete(TEntity entity)
     {
         _dbContext.Set<TEntity>().Remove(entity);
     }
 
-    bool ICommandRepository<TEntity>.Exists(Expression<Func<TEntity, bool>> expression)
+    public bool Exists(Expression<Func<TEntity, bool>> expression)
     {
         return _dbContext.Set<TEntity>().Any(expression);
     }
 
-    async Task<bool> ICommandRepository<TEntity>.ExistsAsync(Expression<Func<TEntity, bool>> expression)
+    public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression)
     {
         return await _dbContext.Set<TEntity>().AnyAsync(expression);
     }
 
-    TEntity ICommandRepository<TEntity>.Get(ulong id)
+    public TEntity Get(TId id)
     {
         return _dbContext.Set<TEntity>().Find(id);
     }
 
-    async Task<TEntity> ICommandRepository<TEntity>.GetAsync(ulong id)
+    public async Task<TEntity> GetAsync(TId id)
     {
         return await _dbContext.Set<TEntity>().FindAsync(id);
     }
 
-    void ICommandRepository<TEntity>.Insert(TEntity entity)
+    public void Insert(TEntity entity)
     {
         _dbContext.Set<TEntity>().Add(entity);
     }
 
-    async Task ICommandRepository<TEntity>.InsertAsync(TEntity entity)
+    public async Task InsertAsync(TEntity entity)
     {
         await _dbContext.Set<TEntity>().AddAsync(entity);
     }

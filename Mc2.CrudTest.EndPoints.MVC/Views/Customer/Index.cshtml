@@ -1,8 +1,46 @@
 ﻿@{
     ViewData["Title"] = "Customer Page";
 }
+@model List<Customer>
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Mc2.CrudTest Project</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 my-4">
+                <a href="/Customer/AddCustomer" class="btn btn-primary btn-lg">Add Customer</a>
+
+            </div>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>BirthDate</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Bank Account Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.FirstName</td>
+                        <td>@customer.LastName</td>
+                        <td>@customer.DateOfBirth</td>
+                        <td>@customer.PhoneNumber</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.BankAcountNumber</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
