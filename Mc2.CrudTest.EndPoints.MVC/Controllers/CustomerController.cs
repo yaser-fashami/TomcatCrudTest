@@ -1,9 +1,7 @@
 ﻿using Mc2.CrudTest.Core.Contracts.Customers.Commands;
 using Mc2.CrudTest.Core.Contracts.Customers.Queries;
-using Mc2.CrudTest.Core.Domain.Entities;
 using Mc2.CrudTest.Framework.EndPoints.WebMVC.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Mc2.CrudTest.EndPoints.MVC.Controllers;
 public class CustomerController : BaseController
